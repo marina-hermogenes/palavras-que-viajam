@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#11102d" />
+    <title>Palavras que Viajam</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="pattern pattern-top" aria-hidden="true"></div>
+    <main id="app">
+      <section class="screen active" id="home-screen" aria-labelledby="home-title">
+        <div class="home-copy">
+          <div class="origin-pills" aria-label="Origens exploradas">
+            <span class="pill african">Origem africana</span>
+            <span class="pill indigenous">Origem indígena</span>
+          </div>
+          <h1 id="home-title"><span>PALAVRAS</span><strong>QUE VIAJAM</strong></h1>
+          <p class="lead">Você fala palavras de muitos povos todos os dias.<br />Adivinhe de onde elas vieram.</p>
+          <div class="home-actions">
+            <button class="button yellow" data-action="start">COMEÇAR JOGO</button>
+            <button class="button outline" data-action="instructions">COMO JOGAR</button>
+          </div>
+        </div>
+        <div class="word-stack" aria-hidden="true">
+          <div class="stack-card card-green">TUPI<em>ABACAXI</em></div>
+          <div class="stack-card card-yellow">BANTO · QUIMBUNDO</div>
+          <div class="stack-card card-orange">IORUBÁ<em>AXÉ</em></div>
+        </div>
+      </section>
+
+      <section class="screen" id="instructions-screen" aria-labelledby="instructions-title">
+        <div class="screen-nav"><button class="text-button nav-button" data-action="home">← Início</button></div>
+        <div class="section-heading"><span>COMO</span> JOGAR</div>
+        <div class="instruction-grid">
+          <article class="instruction-card yellow-card"><b>1</b><h2>A PALAVRA</h2><p>Um time vê a palavra e a pista na tela.</p></article>
+          <article class="instruction-card orange-card"><b>2</b><h2>ADIVINHEM</h2><p>O time conversa e escolhe a língua de origem entre opções africanas e indígenas.</p></article>
+          <article class="instruction-card green-card"><b>3</b><h2>VIRE A CARTA</h2><p>Todos leem a história do povo que criou a palavra. Quem acertou ganha 1 ponto.</p></article>
+          <article class="instruction-card pink-card"><b>4</b><h2>CONVERSEM</h2><p>A turma faz uma roda de conversa sobre a palavra. Depois, vem a próxima carta.</p></article>
+        </div>
+        <div class="instruction-footer"><p>Não precisa de um aparelho por aluno: a professora projeta a tela e a turma joga em times.</p><button class="button yellow" data-action="start">ENTENDI, VAMOS!</button></div>
+      </section>
+
+      <section class="screen" id="teams-screen" aria-labelledby="teams-title">
+        <div class="screen-nav"><button class="text-button nav-button" data-action="instructions">← Como jogar</button></div>
+        <div class="section-heading"><span>MONTAR OS</span> TIMES</div>
+        <p class="screen-subtitle">Escolham um nome para cada time. A turma joga junta, com a tela projetada.</p>
+        <form id="teams-form">
+          <div class="team-form-grid" id="team-form-grid"></div>
+          <button class="button outline add-team-button" type="button" data-action="add-team">+ ADICIONAR TIME</button>
+          <div class="rounds-control"><span>Rodadas</span><button type="button" data-action="round-minus" aria-label="Diminuir rodadas">−</button><output id="round-count">8</output><button type="button" data-action="round-plus" aria-label="Aumentar rodadas">+</button></div>
+          <button class="button yellow start-game" type="submit">BORA JOGAR</button>
+        </form>
+      </section>
+
+      <section class="screen" id="question-screen" aria-labelledby="question-title">
+        <header class="game-header"><button class="text-button nav-button" data-action="teams">← Times</button><span id="round-label">RODADA 1 DE 8</span><div class="scoreboard" id="scoreboard"></div></header>
+        <div class="game-card">
+          <div class="question-copy">
+            <p class="turn-label" id="turn-label">Vez do Time Azul</p>
+            <h2 id="question-title">QUILOMBO</h2>
+            <div class="zigzag accent-yellow" aria-hidden="true"></div>
+            <p class="clue"><b>Pista:</b> lugar de resistência, onde pessoas escravizadas buscaram liberdade.</p>
+          </div>
+          <div class="answer-area">
+            <h3>De onde vem essa palavra?</h3>
+            <p class="answer-group african-text">Línguas africanas</p>
+            <div class="answer-options" id="answer-options"></div>
+            <p class="answer-group indigenous-text">Línguas indígenas</p>
+            <div class="answer-options indigenous-options" id="indigenous-options"></div>
+          </div>
+        </div>
+        <div class="game-actions"><button class="button pink reveal-button" id="reveal-button" data-action="reveal" disabled>VIRAR A CARTA</button><button class="text-button quit-button" data-action="quit">Encerrar jogo</button></div>
+      </section>
+
+      <section class="screen" id="reveal-screen" aria-labelledby="reveal-title">
+        <header class="game-header reveal-header"><button class="text-button nav-button" data-action="question">← Pergunta</button><span class="result-badge" id="result-badge">Time Azul acertou! +1 ponto</span><span id="reveal-round-label">RODADA 1 DE 8</span></header>
+        <div class="reveal-card">
+          <div class="reveal-word"><h2 id="reveal-title">QUILOMBO</h2><div class="zigzag accent-pink" aria-hidden="true"></div><span class="origin-tag" id="origin-tag">Origem: banto · quimbundo</span></div>
+          <div class="story-copy"><p class="story-heading">A história por trás da palavra</p><p id="story-text"></p><div class="conversation"><span>Roda de conversa</span><b id="conversation-text"></b></div></div>
+        </div>
+        <div class="game-actions"><button class="button navy next-button" data-action="next" id="next-button">PRÓXIMA CARTA</button><button class="text-button quit-button" data-action="quit">Encerrar jogo</button></div>
+      </section>
+
+      <section class="screen" id="end-screen" aria-labelledby="end-title">
+        <div class="end-card"><p class="eyebrow">FIM DE JOGO</p><h2 id="end-title">QUE RODADA!</h2><p id="winner-text"></p><div class="final-scores" id="final-scores"></div><button class="button yellow" data-action="restart">JOGAR DE NOVO</button><button class="text-button" data-action="home">Voltar ao início</button></div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <p><strong>Palavras que Viajam</strong> · Material pedagógico desenvolvido para a disciplina de História e Culturas Afro-Brasileiras e Indígenas · período 2026/2.</p>
+      <p><strong>Integrantes:</strong> Petter Douglas Rodrigues Araújo · Isabela Gomes Oliveira · Vitoria Keda · Marina Hermógenes Siqueira · João Carlos · Letícia Barros · Mateus Milani Rodrigues.</p>
+    </footer>
+    <div class="dialog-backdrop" id="quit-dialog" role="dialog" aria-modal="true" aria-labelledby="quit-title" hidden>
+      <div class="dialog-card">
+        <h2 id="quit-title">Encerrar o jogo?</h2>
+        <p>O placar e a rodada atual serão descartados. Essa ação não pode ser desfeita.</p>
+        <div class="dialog-actions"><button class="button outline" data-action="cancel-quit">Continuar jogando</button><button class="button pink" data-action="confirm-quit">Encerrar</button></div>
+      </div>
+    </div>
+    <div class="pattern pattern-bottom" aria-hidden="true"></div>
+    <script src="app.js"></script>
+  </body>
+</html>
